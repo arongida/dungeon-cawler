@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://bifcqhfj4knfa"]
+
+[ext_resource type="Texture2D" uid="uid://des1yv7qgiuik" path="res://[PeakPixels] Common Birds/Collared Dove/Collared Dove.png" id="1_584jx"]
+[ext_resource type="Script" uid="uid://dxshx6h06g58g" path="res://mob.gd" id="1_r6b5h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_584jx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6b5h"]
+atlas = ExtResource("1_584jx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6frnq"]
+atlas = ExtResource("1_584jx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gguu4"]
+atlas = ExtResource("1_584jx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpg5f"]
+atlas = ExtResource("1_584jx")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bhu7"]
+atlas = ExtResource("1_584jx")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejbti"]
+atlas = ExtResource("1_584jx")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch7wj"]
+atlas = ExtResource("1_584jx")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4v8o"]
+atlas = ExtResource("1_584jx")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w71a0"]
+atlas = ExtResource("1_584jx")
+region = Rect2(1024, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utplx"]
+atlas = ExtResource("1_584jx")
+region = Rect2(1088, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8022j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6b5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6frnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gguu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpg5f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bhu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejbti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch7wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4v8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w71a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utplx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_r6b5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 14)
+scale = Vector2(2.5599964, 2.5999994)
+shape = SubResource("CircleShape2D_584jx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8022j")
+animation = &"walk"
+frame_progress = 0.1000296
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

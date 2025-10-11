@@ -527,7 +527,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 7.0
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
@@ -538,11 +538,14 @@ script = ExtResource("1_onrkg")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mgmjd")
 animation = &"walk"
+frame_progress = 0.8113034
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 14)
-scale = Vector2(-6.4136066, -5.1440134)
+scale = Vector2(-4.653606, -2.8640144)
 shape = SubResource("CircleShape2D_onrkg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

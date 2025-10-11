@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="DungeonCawler"
-run/main_scene="uid://dq8m7vo5cdnvk"
+run/main_scene="uid://iu0lr6xqjp3t"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
 
 [input]
 
