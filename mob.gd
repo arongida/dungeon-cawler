@@ -14,12 +14,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if is_queued_for_deletion():
+		return
 	var velocity = Vector2.ZERO
 	if player:
 		velocity = (player.position - position).normalized() * speed
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if velocity.length() > 0.1:
 		$AnimatedSprite2D.animation = "walk"

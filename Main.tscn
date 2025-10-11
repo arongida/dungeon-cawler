@@ -1,18 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://iu0lr6xqjp3t"]
+[gd_scene load_steps=7 format=3 uid="uid://iu0lr6xqjp3t"]
 
 [ext_resource type="PackedScene" uid="uid://dq8m7vo5cdnvk" path="res://Player.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://ceevq763wdikp" path="res://main.gd" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://bifcqhfj4knfa" path="res://Mob.tscn" id="2_r0du0"]
+[ext_resource type="Texture2D" uid="uid://cet6dr30f171p" path="res://bg.png" id="3_fos0i"]
+[ext_resource type="PackedScene" uid="uid://71h6n7yxiym5" path="res://HUD.tscn" id="4_cm0pq"]
 
 [sub_resource type="Curve2D" id="Curve2D_glv2v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 8)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 8, 0, 0, 0, 0, 1920, 1088, 0, 0, 0, 0, 8, 1080, 0, 0, 0, 0, 0, 8)
 }
 point_count = 6
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 mob_scene = ExtResource("2_r0du0")
+
+[node name="Background2" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = 1920.0
+offset_bottom = 1088.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_fos0i")
 
 [node name="Player" parent="." instance=ExtResource("1_glv2v")]
 
@@ -35,7 +50,10 @@ rotation = -1.5707964
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
+[node name="HUD" parent="." instance=ExtResource("4_cm0pq")]
+
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

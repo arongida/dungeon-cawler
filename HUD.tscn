@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://71h6n7yxiym5"]
+
+[ext_resource type="Script" uid="uid://cldbmg4b0w2h3" path="res://hud.gd" id="1_k5de2"]
+
+[sub_resource type="SystemFont" id="SystemFont_5xyro"]
+
+[sub_resource type="SystemFont" id="SystemFont_k5de2"]
+
+[sub_resource type="SystemFont" id="SystemFont_efote"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_k5de2"]
+action = &"start"
+
+[sub_resource type="Shortcut" id="Shortcut_efote"]
+events = [SubResource("InputEventAction_k5de2")]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_k5de2")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_fonts/font = SubResource("SystemFont_5xyro")
+theme_override_font_sizes/font_size = 52
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -73.5
+offset_right = 240.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_k5de2")
+theme_override_font_sizes/font_size = 52
+text = "Caw caw!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.00006
+offset_top = -194.99994
+offset_right = 99.99994
+offset_bottom = -94.99994
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.9979026, 0.9952203)
+theme_override_fonts/font = SubResource("SystemFont_efote")
+theme_override_font_sizes/font_size = 52
+shortcut = SubResource("Shortcut_efote")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
