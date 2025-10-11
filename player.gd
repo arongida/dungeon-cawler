@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_h = velocity.x > 0
+		scale.x = -1 if velocity.x > 0 else 1
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "walk"
 	else:

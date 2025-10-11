@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://des1yv7qgiuik" path="res://[PeakPixels] Common Birds/Collared Dove/Collared Dove.png" id="1_584jx"]
 [ext_resource type="Script" uid="uid://dxshx6h06g58g" path="res://mob.gd" id="1_r6b5h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_584jx"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6b5h"]
+radius = 14.198461
+height = 53.96968
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6b5h"]
 atlas = ExtResource("1_584jx")
@@ -93,10 +95,10 @@ collision_mask = 0
 script = ExtResource("1_r6b5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 5.000001)
-scale = Vector2(2.3599985, 2.993999)
-shape = SubResource("CircleShape2D_584jx")
-debug_color = Color(0.7233661, 0.1558666, 0.06830953, 0.76862746)
+position = Vector2(-4.0000005, 13)
+rotation = -0.84753066
+shape = SubResource("CapsuleShape2D_r6b5h")
+debug_color = Color(0.7202103, 0.13961133, 0.2147871, 0.76862746)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
