@@ -91,17 +91,19 @@ animations = [{
 }]
 
 [node name="Area2D" type="Area2D" groups=["mobs"]]
+collision_layer = 3
 collision_mask = 0
 script = ExtResource("1_r6b5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.0000005, 13)
 rotation = -0.84753066
+scale = Vector2(1.4543118, 1.3340015)
 shape = SubResource("CapsuleShape2D_r6b5h")
 debug_color = Color(0.7202103, 0.13961133, 0.2147871, 0.76862746)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_8022j")
 animation = &"walk"
 frame_progress = 0.65576607

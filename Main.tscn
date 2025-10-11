@@ -48,12 +48,9 @@ curve = SubResource("Curve2D_glv2v")
 position = Vector2(0, 8)
 rotation = -1.5707964
 
-[node name="ScoreTimer" type="Timer" parent="."]
-
 [node name="HUD" parent="." instance=ExtResource("4_cm0pq")]
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

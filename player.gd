@@ -1,6 +1,6 @@
 extends Area2D
 signal hit
-
+@export var nut_scene: PackedScene
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
@@ -48,3 +48,9 @@ func _on_area_entered(area: Area2D) -> void:
 	hide()
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
+
+
+func _on_nut_timer_timeout() -> void:
+	var nut = nut_scene.instantiate()
+	nut.position = position
+	get_parent().add_child(nut)

@@ -17,8 +17,8 @@ func _on_player_hit() -> void:
 	game_over()
 	
 func game_over():
-	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$Player/NutTimer.stop()
 	$HUD.show_game_over()
 	get_tree().call_group("mobs", "queue_free")
 	
@@ -37,19 +37,16 @@ func _on_mob_timer_timeout() -> void:
 	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 	mob.position = mob_spawn_location.position
-
-	
 	add_child(mob)
 
 func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
-	$ScoreTimer.start()
-
-
-func _on_score_timer_timeout() -> void:
-	score += 1
-	$HUD.update_score(score)
+	$Player/NutTimer.start()
 
 
 func _on_hud_start_game() -> void:
 	new_game()
+	
+func update_score():
+	score += 1
+	$HUD.update_score(score)

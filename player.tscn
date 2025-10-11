@@ -1,7 +1,8 @@
-[gd_scene load_steps=72 format=3 uid="uid://dq8m7vo5cdnvk"]
+[gd_scene load_steps=73 format=3 uid="uid://dq8m7vo5cdnvk"]
 
 [ext_resource type="Texture2D" uid="uid://no1knafin5mj" path="res://[PeakPixels] Common Birds/Crow/Crow.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://d0ahve4xrt074" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://Nut.tscn" id="2_kne1u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -535,13 +536,14 @@ radius = 11.275036
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_onrkg")
+nut_scene = ExtResource("2_kne1u")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mgmjd")
-animation = &"walk"
-frame_progress = 0.67182374
+animation = &"caw"
+frame_progress = 0.5816554
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.999999, 14)
@@ -549,4 +551,7 @@ rotation = 0.5791667
 scale = Vector2(-4.464328, -2.688871)
 shape = SubResource("CircleShape2D_onrkg")
 
+[node name="NutTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="NutTimer" to="." method="_on_nut_timer_timeout"]
