@@ -1,5 +1,4 @@
 extends Area2D
-signal enemy_hit
 
 @export var speed = 400
 var target = null
@@ -17,6 +16,6 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("mobs"):
-		area.queue_free()
+		#area.queue_free()
 		get_parent().update_score()
 	queue_free()
