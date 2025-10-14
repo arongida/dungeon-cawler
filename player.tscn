@@ -540,6 +540,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 11.275036
 
+[sub_resource type="Animation" id="Animation_cxr5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_e80uo"]
 resource_name = "flash"
 length = 0.4
@@ -554,21 +569,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_cxr5p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cxr5p"]
