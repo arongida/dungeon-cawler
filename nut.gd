@@ -1,13 +1,17 @@
 extends Area2D
 
 @export var speed = 400
-var target = null
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+var _target = null
 
 func _ready() -> void:
+	animation_player.play("spin")
 	var mobs = get_tree().get_nodes_in_group("mobs")
-	target = mobs.pick_random()
-	if target != null:
-		look_at(target.global_position)
+	_target = mobs.pick_random()
+	if _target != null:
+		look_at(_target.global_position)
 
 
 func _process(delta: float) -> void:
@@ -16,6 +20,10 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("mobs"):
-		#area.queue_free()
 		get_parent().update_score()
 	queue_free()
+
+
+func _on_spin_timer_timeout() -> void:
+	animation_player.play("spin")
+	print_debug("played spin")

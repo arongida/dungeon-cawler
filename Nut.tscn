@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://co62be2ugu8lf"]
+[gd_scene load_steps=7 format=3 uid="uid://co62be2ugu8lf"]
 
 [ext_resource type="Script" uid="uid://bkf0q3cmqpmu7" path="res://nut.gd" id="1_rlha0"]
 [ext_resource type="Texture2D" uid="uid://baqjpu3pwdbj0" path="res://walnut.png" id="1_tilog"]
@@ -6,12 +6,48 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_tilog"]
 radius = 6.08097
 
+[sub_resource type="Animation" id="Animation_rlha0"]
+resource_name = "spin"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3.1415927, -0.16666667, -0.5235988, 0, 0, 6.2831855, -0.16666667, -0.5235988, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="Animation" id="Animation_sdjcu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5235988, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhcak"]
+_data = {
+&"RESET": SubResource("Animation_sdjcu"),
+&"spin": SubResource("Animation_rlha0")
+}
+
 [node name="Nut" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_rlha0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.5235988
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_tilog")
 
@@ -20,4 +56,14 @@ position = Vector2(0.9999999, 0)
 scale = Vector2(2.466712, 2.3200011)
 shape = SubResource("CircleShape2D_tilog")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dhcak")
+}
+
+[node name="SpinTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]
