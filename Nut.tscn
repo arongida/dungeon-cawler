@@ -1,10 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://co62be2ugu8lf"]
+[gd_scene load_steps=9 format=3 uid="uid://co62be2ugu8lf"]
 
 [ext_resource type="Script" uid="uid://bkf0q3cmqpmu7" path="res://nut.gd" id="1_rlha0"]
 [ext_resource type="Texture2D" uid="uid://baqjpu3pwdbj0" path="res://walnut.png" id="1_tilog"]
+[ext_resource type="Script" uid="uid://bpn6iimcuf0lp" path="res://sprite_2d.gd" id="3_dhcak"]
+[ext_resource type="Script" uid="uid://d36ahco5wpo5h" path="res://trail.gd" id="3_sdjcu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tilog"]
 radius = 6.08097
+
+[sub_resource type="Animation" id="Animation_sdjcu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NutSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5235988, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_rlha0"]
 resource_name = "spin"
@@ -12,27 +28,13 @@ length = 2.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("NutSprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(2, 2, 2),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3.1415927, -0.16666667, -0.5235988, 0, 0, 6.2831855, -0.16666667, -0.5235988, 0, 0),
 "times": PackedFloat32Array(0, 1, 2)
-}
-
-[sub_resource type="Animation" id="Animation_sdjcu"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.5235988, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dhcak"]
@@ -46,10 +48,11 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_rlha0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="NutSprite2D" type="Sprite2D" parent="."]
 rotation = 0.5235988
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_tilog")
+script = ExtResource("3_dhcak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.9999999, 0)
@@ -64,6 +67,9 @@ libraries = {
 [node name="SpinTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Trail" type="Node" parent="."]
+script = ExtResource("3_sdjcu")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]

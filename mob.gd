@@ -39,6 +39,9 @@ func _process_takeoff(delta: float) -> void:
 	if animated_sprite.animation == "takeoff" and animated_sprite.frame >= 5:
 		_velocity = Vector2.UP * speed
 		
+func _updateAlpha(toValue: float):
+	modulate.a = toValue		
+
 func _on_area_entered(area: Area2D) -> void:
 	if _state == State.TAKEOFF:
 		return
@@ -48,7 +51,8 @@ func _on_area_entered(area: Area2D) -> void:
 	animated_sprite.play("takeoff")
 	collision_shape.set_deferred("disabled", true)
 	
-	modulate.a = 0.5
+	var tween = get_tree().create_tween()
+	tween.tween_method(_updateAlpha, 0.8, 0, 2)
 	
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
