@@ -1,48 +1,55 @@
 extends Node2D
+
 @export var mob_scene: PackedScene
-var score
 
+@onready var hud: HUD = $HUD
+@onready var player: Player = $Player
+@onready var mob_timer: Timer = $MobTimer
+@onready var start_position: Marker2D = $StartPosition
+@onready var start_timer: Timer = $StartTimer
+@onready var mob_spawn_location: PathFollow2D = $MobPath/MobSpawnLocation
 
-
+var _score
 
 func _on_player_hit() -> void:
-	var hp = $Player.hp
-	$HUD.update_hp(hp)
+	var hp = player.hp
+	hud.update_hp(hp)
 	if hp <= 0:
 		game_over()
 	
 func game_over():
-	$MobTimer.stop()
-	$Player/NutTimer.stop()
-	$HUD.show_game_over()
-	get_tree().call_group("mobs", "queue_free")
+	mob_timer.stop()
+	hud.show_game_over()
+	_clean_up()
 	
 func new_game():
-	get_tree().call_group("mobs", "queue_free")
-	score = 0
-	$Player.start($StartPosition.position)
-	$HUD.update_score(score)
-	$HUD.update_hp($Player.hp)
-	$HUD.show_message("Get Ready!")
-	$StartTimer.start()
+	_clean_up()
+	_score = 0
+	player.start(start_position.position)
+	hud.update_score(_score)
+	hud.update_hp(player.hp)
+	hud.show_message("Get Ready!")
+	start_timer.start()
 
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
-	
-	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 	mob.position = mob_spawn_location.position
 	add_child(mob)
 
 func _on_start_timer_timeout() -> void:
-	$MobTimer.start()
-	$Player/NutTimer.start()
+	mob_timer.start()
+	player.combat_start()
 
 
 func _on_hud_start_game() -> void:
 	new_game()
 	
 func update_score():
-	score += 1
-	$HUD.update_score(score)
+	_score += 1
+	hud.update_score(_score)
+	
+func _clean_up():
+	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("projectiles", "queue_free")

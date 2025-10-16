@@ -1,6 +1,6 @@
 [gd_scene load_steps=78 format=3 uid="uid://dq8m7vo5cdnvk"]
 
-[ext_resource type="Texture2D" path="res://[PeakPixels] Common Birds/Crow/Crow.png" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://no1knafin5mj" path="res://assets/Crow/Crow.png" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/Player.gdshader" id="1_e80uo"]
 [ext_resource type="Script" uid="uid://d0ahve4xrt074" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://scenes/Nut.tscn" id="2_kne1u"]
@@ -588,8 +588,8 @@ metadata/_edit_group_ = true
 use_parent_material = true
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mgmjd")
-animation = &"eat"
-frame_progress = 0.747916
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.999999, 14)

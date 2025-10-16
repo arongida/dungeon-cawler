@@ -52,7 +52,6 @@ func _on_area_entered(area: Area2D) -> void:
 	collision_shape.set_deferred("disabled", true)
 	
 	var tween = get_tree().create_tween()
-	tween.tween_method(_updateAlpha, 0.8, 0, 2)
+	tween.tween_method(_updateAlpha, 0.8, 0.1, 2)
+	tween.tween_callback(queue_free)
 	
-	await get_tree().create_timer(2.0).timeout
-	queue_free()
