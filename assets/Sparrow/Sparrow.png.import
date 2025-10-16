@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2lanugbqn42a"
-path="res://.godot/imported/Peacock.png-dfbe90a5d65112ef97e283ebfd942393.ctex"
+uid="uid://cgc0p8h84ctwm"
+path="res://.godot/imported/Sparrow.png-adc95336ff7a998eb65b3b91e57f6ffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://[PeakPixels] Common Birds/Peacock/Peacock.png"
-dest_files=["res://.godot/imported/Peacock.png-dfbe90a5d65112ef97e283ebfd942393.ctex"]
+source_file="res://assets/Sparrow/Sparrow.png"
+dest_files=["res://.godot/imported/Sparrow.png-adc95336ff7a998eb65b3b91e57f6ffb.ctex"]
 
 [params]
 

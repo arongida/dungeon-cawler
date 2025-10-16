@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgc0p8h84ctwm"
-path="res://.godot/imported/Sparrow.png-a92ff2cc0bc722b2402cf33ae7389eb1.ctex"
+uid="uid://m4d8kn1suj3g"
+path="res://.godot/imported/Pigeon.png-f6b271599399ada564e8dcc9aebaff02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://[PeakPixels] Common Birds/Sparrow/Sparrow.png"
-dest_files=["res://.godot/imported/Sparrow.png-a92ff2cc0bc722b2402cf33ae7389eb1.ctex"]
+source_file="res://assets/Pigeon/Pigeon.png"
+dest_files=["res://.godot/imported/Pigeon.png-f6b271599399ada564e8dcc9aebaff02.ctex"]
 
 [params]
 

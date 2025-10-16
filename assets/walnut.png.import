@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://no1knafin5mj"
-path="res://.godot/imported/Crow.png-fe8c3fc4e98c4dd900daded7ebdce4fa.ctex"
+uid="uid://baqjpu3pwdbj0"
+path="res://.godot/imported/walnut.png-9ca7c7153622863a172a4bc24b9051be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://[PeakPixels] Common Birds/Crow/Crow.png"
-dest_files=["res://.godot/imported/Crow.png-fe8c3fc4e98c4dd900daded7ebdce4fa.ctex"]
+source_file="res://assets/walnut.png"
+dest_files=["res://.godot/imported/walnut.png-9ca7c7153622863a172a4bc24b9051be.ctex"]
 
 [params]
 

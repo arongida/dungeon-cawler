@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m4d8kn1suj3g"
-path="res://.godot/imported/Pigeon.png-e97c55dcc2aa350a324e050c28b70d8e.ctex"
+uid="uid://d2lanugbqn42a"
+path="res://.godot/imported/Peacock.png-32a387e13bf6a2042b2f436f5eeb16f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://[PeakPixels] Common Birds/Pigeon/Pigeon.png"
-dest_files=["res://.godot/imported/Pigeon.png-e97c55dcc2aa350a324e050c28b70d8e.ctex"]
+source_file="res://assets/Peacock/Peacock.png"
+dest_files=["res://.godot/imported/Peacock.png-32a387e13bf6a2042b2f436f5eeb16f9.ctex"]
 
 [params]
 

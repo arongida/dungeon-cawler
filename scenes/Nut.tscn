@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://co62be2ugu8lf"]
 
-[ext_resource type="Script" uid="uid://bkf0q3cmqpmu7" path="res://nut.gd" id="1_rlha0"]
-[ext_resource type="Texture2D" uid="uid://baqjpu3pwdbj0" path="res://walnut.png" id="1_tilog"]
-[ext_resource type="Script" uid="uid://bpn6iimcuf0lp" path="res://sprite_2d.gd" id="3_dhcak"]
-[ext_resource type="Script" uid="uid://d36ahco5wpo5h" path="res://trail.gd" id="3_sdjcu"]
+[ext_resource type="Script" uid="uid://bkf0q3cmqpmu7" path="res://scripts/nut.gd" id="1_x4uin"]
+[ext_resource type="Texture2D" uid="uid://baqjpu3pwdbj0" path="res://assets/walnut.png" id="2_33onv"]
+[ext_resource type="Script" uid="uid://bpn6iimcuf0lp" path="res://scripts/nut_sprite_2d.gd" id="3_3uwlf"]
+[ext_resource type="Script" uid="uid://d36ahco5wpo5h" path="res://scripts/trail.gd" id="4_hct6p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tilog"]
 radius = 6.08097
@@ -46,13 +46,13 @@ _data = {
 [node name="Nut" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("1_rlha0")
+script = ExtResource("1_x4uin")
 
 [node name="NutSprite2D" type="Sprite2D" parent="."]
 rotation = 0.5235988
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_tilog")
-script = ExtResource("3_dhcak")
+texture = ExtResource("2_33onv")
+script = ExtResource("3_3uwlf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.9999999, 0)
@@ -69,7 +69,7 @@ wait_time = 3.0
 autostart = true
 
 [node name="Trail" type="Node" parent="."]
-script = ExtResource("3_sdjcu")
+script = ExtResource("4_hct6p")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]

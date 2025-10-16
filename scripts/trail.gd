@@ -9,10 +9,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	#if (get_tree().get_frame() % 3) == 0:
-		#var newSprite = sprite.duplicate()
-		#newSprite.z_index = 0
-		#get_tree().root.add_child(newSprite)
-		#newSprite.global_position = nut.global_position + sprite.position
-		#newSprite.fadeOut()
+	if (get_tree().get_frame() % 3) == 0:
+		var newSprite = sprite.duplicate()
+		newSprite.z_index = 0
+		get_tree().root.add_child(newSprite)
+		newSprite.global_position = nut.global_position + sprite.position
+		newSprite.fadeOut()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://des1yv7qgiuik"
-path="res://.godot/imported/Collared Dove.png-fa44a5f478d49788c537385b472b6a3a.ctex"
+uid="uid://cet6dr30f171p"
+path="res://.godot/imported/bg.png-23a59c2e9cba2223a50fa3fe41b70b25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://[PeakPixels] Common Birds/Collared Dove/Collared Dove.png"
-dest_files=["res://.godot/imported/Collared Dove.png-fa44a5f478d49788c537385b472b6a3a.ctex"]
+source_file="res://assets/bg.png"
+dest_files=["res://.godot/imported/bg.png-23a59c2e9cba2223a50fa3fe41b70b25.ctex"]
 
 [params]
 

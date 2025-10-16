@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cet6dr30f171p"
-path="res://.godot/imported/bg.png-24bff804693ee063127ad100e04c5185.ctex"
+uid="uid://des1yv7qgiuik"
+path="res://.godot/imported/Collared Dove.png-6648903df87e3939b4e0adb036a5ad43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bg.png"
-dest_files=["res://.godot/imported/bg.png-24bff804693ee063127ad100e04c5185.ctex"]
+source_file="res://assets/Collared Dove/Collared Dove.png"
+dest_files=["res://.godot/imported/Collared Dove.png-6648903df87e3939b4e0adb036a5ad43.ctex"]
 
 [params]
 

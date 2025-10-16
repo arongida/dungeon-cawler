@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://71h6n7yxiym5"]
 
-[ext_resource type="Script" uid="uid://cldbmg4b0w2h3" path="res://hud.gd" id="1_k5de2"]
+[ext_resource type="Script" uid="uid://cldbmg4b0w2h3" path="res://scripts/hud.gd" id="1_k5de2"]
 
 [sub_resource type="SystemFont" id="SystemFont_5xyro"]
 subpixel_positioning = 0
