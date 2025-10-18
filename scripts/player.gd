@@ -2,7 +2,7 @@ class_name Player
 extends Area2D
 signal hit
 @export var nut_scene: PackedScene
-@export var speed = 400
+@export var speed = 200
 @export var hp = 100
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -10,7 +10,7 @@ signal hit
 @onready var flash_animation: AnimationPlayer = $FlashAnimation
 @onready var nut_timer: Timer = $NutTimer
 
-#var _screen_size
+var level = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,7 +35,8 @@ func _process_movement(delta: float):
 		velocity = velocity.normalized() * speed
 			
 		position += velocity * delta
-		#position = position.clamp(Vector2.ZERO, _screen_size)
+		position.x = clamp(position.x, -12500, 12000)
+		position.y = clamp(position.y, -7000, 8000)
 		
 		if velocity.x != 0:
 			animated_sprite.play("walk")
@@ -55,11 +56,17 @@ func combat_start():
 	nut_timer.start()
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(area: Area2D) -> void:		
 	flash_animation.play("flash")
 	hp -= area.damage
 	hit.emit()
 
+func level_up():
+	hp += 10
+	speed += 20
+	nut_timer.wait_time -= 0.05
+	level += 1
+	
 
 func _on_nut_timer_timeout() -> void:
 	var nut = nut_scene.instantiate()

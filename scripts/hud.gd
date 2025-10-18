@@ -8,11 +8,20 @@ signal start_game
 @onready var start_button: Button = $StartButton
 @onready var message_timer: Timer = $MessageTimer
 @onready var hp_label: Label = $HPLabel
+@onready var color_overlay: ColorRect = $ColorRect
+@onready var level_label: Label = $LevelLabel
 
 func show_message(text):
 	message_label.text = text
 	message_label.show()
 	message_timer.start()
+
+func show_message_permanent(text):
+	message_label.text = text
+	message_label.show()
+	
+func hide_message():
+	message_label.hide()
 	
 func show_game_over():
 	show_message("Game Over")
@@ -38,3 +47,9 @@ func _on_message_timer_timeout() -> void:
 	
 func update_hp(hp):
 	hp_label.text = "HP: " + str(hp)
+	
+func update_overlay(transparency):
+	color_overlay.color.a = transparency
+	
+func show_lvl(level):
+	level_label.text = "Lvl: " + str(level)

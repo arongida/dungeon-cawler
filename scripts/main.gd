@@ -13,6 +13,7 @@ var _score
 func _on_player_hit() -> void:
 	var hp = player.hp
 	hud.update_hp(hp)
+	update_score()
 	if hp <= 0:
 		game_over()
 	
@@ -29,7 +30,18 @@ func new_game():
 	hud.update_hp(player.hp)
 	hud.show_message("Get Ready!")
 	start_timer.start()
-
+	
+func _process(delta: float) -> void:
+		var distance = player.global_position.length()
+		if distance > 4000:
+			var max_distance = 6000.0
+			var darkness = distance / max_distance
+			darkness = clamp(darkness, 0.0, 0.99)
+			hud.update_overlay(darkness)
+			hud.show_message_permanent("Turn back!")
+		elif distance <= 4000:
+			hud.update_overlay(0.0)
+			hud.hide_message()
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
@@ -46,6 +58,11 @@ func _on_hud_start_game() -> void:
 func update_score():
 	_score += 1
 	hud.update_score(_score)
+	if _score % 10 == 0:
+		player.level_up()
+		hud.update_hp(player.hp)
+		hud.show_lvl(player.level)
+		mob_timer.wait_time -= 0.02
 	
 func _clean_up():
 	get_tree().call_group("mobs", "queue_free")
