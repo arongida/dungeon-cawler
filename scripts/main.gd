@@ -7,7 +7,6 @@ extends Node2D
 @onready var mob_timer: Timer = $MobTimer
 @onready var start_position: Marker2D = $StartPosition
 @onready var start_timer: Timer = $StartTimer
-@onready var mob_spawn_location: PathFollow2D = $MobPath/MobSpawnLocation
 
 var _score
 
@@ -34,8 +33,6 @@ func new_game():
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
-	mob_spawn_location.progress_ratio = randf()
-	mob.position = mob_spawn_location.position
 	add_child(mob)
 
 func _on_start_timer_timeout() -> void:

@@ -10,11 +10,11 @@ signal hit
 @onready var flash_animation: AnimationPlayer = $FlashAnimation
 @onready var nut_timer: Timer = $NutTimer
 
-var _screen_size
+#var _screen_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_screen_size = get_viewport_rect().size
+	#_screen_size = get_viewport_rect().size
 	hide()
 
 
@@ -35,7 +35,7 @@ func _process_movement(delta: float):
 		velocity = velocity.normalized() * speed
 			
 		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, _screen_size)
+		#position = position.clamp(Vector2.ZERO, _screen_size)
 		
 		if velocity.x != 0:
 			animated_sprite.play("walk")

@@ -12,9 +12,20 @@ var _state: State = State.WALK
 var _velocity: Vector2 = Vector2.ZERO
 var _player: Node2D
 
+func _assign_start_position():
+	var min_distance = 600.0
+	var max_distance = 900.0
+	var angle = randf_range(0, 2 * PI)
+	var radius = randf_range(min_distance, max_distance)
+	var offset = Vector2(radius, 0).rotated(angle)
+	position = _player.global_position + offset
+
 func _ready() -> void:
 	_player = get_parent().find_child("Player")
 	animated_sprite.play("walk")
+	_assign_start_position()
+
+
 
 func _process(delta: float) -> void:
 	match _state:
