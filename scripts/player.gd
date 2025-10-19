@@ -33,7 +33,6 @@ func _handle_dead():
 func _process_movement(delta: float):
 		var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		velocity = velocity.normalized() * speed
-			
 		position += velocity * delta
 		position.x = clamp(position.x, -12500, 12000)
 		position.y = clamp(position.y, -7000, 8000)

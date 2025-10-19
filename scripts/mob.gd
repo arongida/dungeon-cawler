@@ -1,6 +1,6 @@
 extends Area2D
 
-enum State {WALK, TAKEOFF}
+enum State {ALIVE, DEAD}
 
 @export var speed: int = 100
 @export var damage: int = 10
@@ -8,7 +8,7 @@ enum State {WALK, TAKEOFF}
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
-var _state: State = State.WALK
+var _state: State = State.ALIVE
 var _velocity: Vector2 = Vector2.ZERO
 var _player: Node2D
 
@@ -22,31 +22,41 @@ func _assign_start_position():
 
 func _ready() -> void:
 	_player = get_parent().find_child("Player")
-	animated_sprite.play("walk")
+	animated_sprite.play("fly")
 	_assign_start_position()
 
 
 
 func _process(delta: float) -> void:
 	match _state:
-		State.WALK:
-			_process_walk(delta)
-		State.TAKEOFF:
-			_process_takeoff(delta)
+		State.ALIVE:
+			_process_alive(delta)
+		State.DEAD:
+			_process_dead(delta)
 	position += _velocity * delta
 	
-func _process_walk(delta: float) -> void:
+func _process_alive(delta: float) -> void:
 	if not is_instance_valid(_player):
 		_velocity = Vector2.ZERO
 		animated_sprite.play("idle")
 		return
+
+	var distance_to_player = global_position.distance_to(_player.global_position)
+	var current_speed = speed
+	if distance_to_player > 700:
+		current_speed = speed * 2
+		animated_sprite.play("fly")
+	elif distance_to_player < 200: 
+		animated_sprite.play("walk")
+
 	var direction = global_position.direction_to(_player.global_position)
-	_velocity = direction * speed
+	_velocity = direction * current_speed
 	
 	if direction.x != 0:
 		scale.x = -1 if direction.x > 0 else 1 
 		
-func _process_takeoff(delta: float) -> void:
+		
+func _process_dead(delta: float) -> void:
 	if animated_sprite.animation == "takeoff" and animated_sprite.frame >= 5:
 		_velocity = Vector2.UP * speed
 		
@@ -54,9 +64,9 @@ func _updateAlpha(toValue: float):
 	modulate.a = toValue		
 
 func _on_area_entered(area: Area2D) -> void:
-	if _state == State.TAKEOFF:
+	if _state == State.DEAD:
 		return
-	_state = State.TAKEOFF
+	_state = State.DEAD
 	_velocity = Vector2.ZERO
 	
 	animated_sprite.play("takeoff")

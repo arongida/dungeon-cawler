@@ -31,17 +31,6 @@ func new_game():
 	hud.show_message("Get Ready!")
 	start_timer.start()
 	
-func _process(delta: float) -> void:
-		var distance = player.global_position.length()
-		if distance > 4000:
-			var max_distance = 6000.0
-			var darkness = distance / max_distance
-			darkness = clamp(darkness, 0.0, 0.99)
-			hud.update_overlay(darkness)
-			hud.show_message_permanent("Turn back!")
-		elif distance <= 4000:
-			hud.update_overlay(0.0)
-			hud.hide_message()
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
