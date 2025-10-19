@@ -46,7 +46,7 @@ func _process_alive(delta: float) -> void:
 	if distance_to_player > 700:
 		current_speed = speed * 2
 		animated_sprite.play("fly")
-	elif distance_to_player < 200: 
+	elif distance_to_player < 300: 
 		animated_sprite.play("walk")
 
 	var direction = global_position.direction_to(_player.global_position)
@@ -57,7 +57,7 @@ func _process_alive(delta: float) -> void:
 		
 		
 func _process_dead(delta: float) -> void:
-	if animated_sprite.animation == "takeoff" and animated_sprite.frame >= 5:
+	if animated_sprite.frame >= 5:
 		_velocity = Vector2.UP * speed
 		
 func _updateAlpha(toValue: float):
@@ -69,7 +69,8 @@ func _on_area_entered(area: Area2D) -> void:
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
 	
-	animated_sprite.play("takeoff")
+	if animated_sprite.animation == "walk":
+		animated_sprite.play("takeoff")
 	collision_shape.set_deferred("disabled", true)
 	
 	var tween = get_tree().create_tween()
