@@ -1,3 +1,4 @@
+class_name Main
 extends Node2D
 
 @export var mob_scene: PackedScene
@@ -13,9 +14,9 @@ var _score
 func _on_player_hit() -> void:
 	var hp = player.hp
 	hud.update_hp(hp)
-	update_score()
 	if hp <= 0:
 		game_over()
+	
 	
 func game_over():
 	mob_timer.stop()
@@ -44,15 +45,19 @@ func _on_start_timer_timeout() -> void:
 func _on_hud_start_game() -> void:
 	new_game()
 	
-func update_score():
-	_score += 1
+func update_score(score: int, exp: int):
+	_score += score
 	hud.update_score(_score)
-	if _score % 10 == 0:
-		player.level_up()
-		hud.update_hp(player.hp)
-		hud.show_lvl(player.level)
-		mob_timer.wait_time -= 0.02
-	
+	player.exp += exp
+	hud.update_exp_bar(player.exp, player.level * 20)
+
+
 func _clean_up():
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("projectiles", "queue_free")
+
+
+func _on_player_leveled_up() -> void:
+	hud.update_hp(player.hp)
+	hud.show_lvl(player.level)
+	mob_timer.wait_time -= 0.02

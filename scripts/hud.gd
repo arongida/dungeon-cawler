@@ -10,6 +10,7 @@ signal start_game
 @onready var hp_label: Label = $HPLabel
 @onready var color_overlay: ColorRect = $ColorRect
 @onready var level_label: Label = $LevelLabel
+@onready var exp_bar: ProgressBar = $ExpBar
 
 func show_message(text):
 	message_label.text = text
@@ -53,3 +54,9 @@ func update_overlay(transparency):
 	
 func show_lvl(level):
 	level_label.text = "Lvl: " + str(level)
+
+func update_exp_bar(exp, threshold):
+	if threshold > 0:
+		exp_bar.value = (float(exp) / threshold) * 100
+	else:
+		exp_bar.value = 0

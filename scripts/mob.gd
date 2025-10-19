@@ -7,10 +7,13 @@ enum State {ALIVE, DEAD}
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var main: Main = get_parent()
 
 var _state: State = State.ALIVE
 var _velocity: Vector2 = Vector2.ZERO
 var _player: Node2D
+
+var exp_reward = 1
 
 func _assign_start_position():
 	var min_distance = 600.0
@@ -76,4 +79,6 @@ func _on_area_entered(area: Area2D) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_method(_updateAlpha, 0.8, 0.1, 2)
 	tween.tween_callback(queue_free)
+	
+	main.update_score(1, exp_reward)
 	

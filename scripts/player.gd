@@ -1,6 +1,8 @@
 class_name Player
 extends Area2D
 signal hit
+signal leveled_up
+
 @export var nut_scene: PackedScene
 @export var speed = 200
 @export var hp = 100
@@ -11,6 +13,7 @@ signal hit
 @onready var nut_timer: Timer = $NutTimer
 
 var level = 1
+var exp = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,8 +24,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_process_movement(delta)
+	_process_exp()
 	if hp <= 0:
 		_handle_dead()
+		
+func _process_exp():
+	if exp >= level * 20:
+		exp = 0
+		level_up()
 		
 
 func _handle_dead():
@@ -65,6 +74,7 @@ func level_up():
 	speed += 20
 	nut_timer.wait_time -= 0.05
 	level += 1
+	leveled_up.emit()
 	
 
 func _on_nut_timer_timeout() -> void:
