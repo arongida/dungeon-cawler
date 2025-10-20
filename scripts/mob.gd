@@ -64,7 +64,11 @@ func _process_dead(delta: float) -> void:
 		_velocity = Vector2.UP * speed
 		
 func _updateAlpha(toValue: float):
-	modulate.a = toValue		
+	modulate.a = toValue	
+	
+	
+func _updateFlash(toValue: float):
+	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
 func _on_area_entered(area: Area2D) -> void:
 	if _state == State.DEAD:
@@ -76,9 +80,13 @@ func _on_area_entered(area: Area2D) -> void:
 		animated_sprite.play("takeoff")
 	collision_shape.set_deferred("disabled", true)
 	
-	var tween = get_tree().create_tween()
-	tween.tween_method(_updateAlpha, 0.8, 0.1, 2)
-	tween.tween_callback(queue_free)
+	var flash_tween = get_tree().create_tween()
+	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
+
+	
+	var modulate_tween = get_tree().create_tween()
+	modulate_tween.tween_method(_updateAlpha, 0.8, 0.1, 2)
+	modulate_tween.tween_callback(queue_free)
 	
 	main.update_score(1, exp_reward)
 	

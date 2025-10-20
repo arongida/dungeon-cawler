@@ -9,7 +9,6 @@ signal leveled_up
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var flash_animation: AnimationPlayer = $FlashAnimation
 @onready var nut_timer: Timer = $NutTimer
 
 var level = 1
@@ -63,9 +62,12 @@ func start(pos):
 func combat_start():
 	nut_timer.start()
 
+func _updateFlash(toValue: float):
+	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
 func _on_area_entered(area: Area2D) -> void:		
-	flash_animation.play("flash")
+	var flash_tween = get_tree().create_tween()
+	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
 	hp -= area.damage
 	hit.emit()
 
