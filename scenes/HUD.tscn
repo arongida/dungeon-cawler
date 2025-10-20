@@ -20,6 +20,22 @@ events = [SubResource("InputEventAction_k5de2")]
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_k5de2")
 
+[node name="LevelUpMenu" type="PopupMenu" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(200, 200)
+always_on_top = true
+content_scale_factor = 2.01
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+item_count = 3
+item_0/text = "HP"
+item_0/id = 0
+item_1/text = "Speed"
+item_1/id = 1
+item_2/text = "Cooldown"
+item_2/id = 2
+
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1077.0
@@ -83,8 +99,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="HPLabel" type="Label" parent="."]
+offset_top = 4.0
 offset_right = 188.0
-offset_bottom = 72.0
+offset_bottom = 76.0
 theme_override_fonts/font = SubResource("SystemFont_5xyro")
 theme_override_font_sizes/font_size = 52
 text = "HP: 100"
@@ -114,5 +131,6 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 10
 
+[connection signal="index_pressed" from="LevelUpMenu" to="." method="_on_popup_menu_index_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

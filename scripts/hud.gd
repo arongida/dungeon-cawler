@@ -2,6 +2,7 @@ class_name HUD
 extends CanvasLayer
 
 signal start_game
+signal item_selected
 
 @onready var score_label: Label = $ScoreLabel
 @onready var message_label: Label = $MessageLabel
@@ -11,6 +12,7 @@ signal start_game
 @onready var color_overlay: ColorRect = $ColorRect
 @onready var level_label: Label = $LevelLabel
 @onready var exp_bar: ProgressBar = $ExpBar
+@onready var level_up_menu: PopupMenu = $LevelUpMenu
 
 func show_message(text):
 	message_label.text = text
@@ -60,3 +62,12 @@ func update_exp_bar(exp, threshold):
 		exp_bar.value = (float(exp) / threshold) * 100
 	else:
 		exp_bar.value = 0
+
+func show_level_up_menu(show: bool):
+	if show:
+		level_up_menu.show()
+	else:
+		level_up_menu.hide()
+
+func _on_popup_menu_index_pressed(index: int) -> void:
+	item_selected.emit(index)

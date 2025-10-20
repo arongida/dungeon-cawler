@@ -72,10 +72,6 @@ func _on_area_entered(area: Area2D) -> void:
 	hit.emit()
 
 func level_up():
-	hp += 10
-	speed += 20
-	nut_timer.wait_time -= 0.05
-	level += 1
 	leveled_up.emit()
 	
 

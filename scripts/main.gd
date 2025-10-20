@@ -58,6 +58,20 @@ func _clean_up():
 
 
 func _on_player_leveled_up() -> void:
+	get_tree().paused = true
 	hud.update_hp(player.hp)
 	hud.show_lvl(player.level)
 	mob_timer.wait_time -= 0.02
+	hud.show_level_up_menu(true)
+
+
+func _on_hud_item_selected(index: int) -> void:
+	if index == 0:
+		player.hp += 10
+		hud.update_hp(player.hp)
+	elif index == 1:
+		player.speed += 10
+	elif index == 2:
+		player.nut_timer.wait_time -= 0.1
+	hud.show_level_up_menu(false)
+	get_tree().paused = false
