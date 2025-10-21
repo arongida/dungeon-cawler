@@ -7,6 +7,7 @@ enum State {ALIVE, DEAD}
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var wing_flap_player: AudioStreamPlayer2D = $WingFlapPlayer
 @onready var main: Main = get_parent()
 
 var _state: State = State.ALIVE
@@ -80,9 +81,11 @@ func _on_area_entered(area: Area2D) -> void:
 		animated_sprite.play("takeoff")
 	collision_shape.set_deferred("disabled", true)
 	
+	
+	
 	var flash_tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
-
+	flash_tween.tween_callback(wing_flap_player.play)
 	
 	var modulate_tween = get_tree().create_tween()
 	modulate_tween.tween_method(_updateAlpha, 0.8, 0.1, 2)

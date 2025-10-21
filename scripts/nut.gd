@@ -1,8 +1,10 @@
+class_name Nut
 extends Area2D
 
 @export var speed = 400
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var crack_sound_player: AudioStreamPlayer2D = $CrackSoundPlayer
 
 var _target = null
 
@@ -19,7 +21,15 @@ func _process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	queue_free()
+	monitoring = false
+	speed = 0
+	hide()
+	
+	if crack_sound_player.stream:
+		crack_sound_player.play()
+		crack_sound_player.finished.connect(queue_free)
+	else:
+		queue_free()
 
 
 func _on_spin_timer_timeout() -> void:
