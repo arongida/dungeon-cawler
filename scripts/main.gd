@@ -8,6 +8,7 @@ extends Node2D
 @onready var mob_timer: Timer = $MobTimer
 @onready var start_position: Marker2D = $StartPosition
 @onready var start_timer: Timer = $StartTimer
+@onready var music_player: ThemeMusicPlayer = $ThemeMusicPlayer
 
 var _score
 
@@ -20,12 +21,14 @@ func _on_player_hit() -> void:
 	
 func game_over():
 	mob_timer.stop()
+	music_player.fadeOut()
 	hud.show_game_over()
 	_clean_up()
 	
 func new_game():
 	_clean_up()
 	_score = 0
+	music_player.fadeIn()
 	player.start(start_position.position)
 	hud.update_score(_score)
 	hud.update_hp(player.hp)

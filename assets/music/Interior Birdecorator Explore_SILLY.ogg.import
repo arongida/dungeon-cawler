@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dj5efkvt570pi"
+path="res://.godot/imported/Interior Birdecorator Explore_SILLY.ogg-c4eda11312bb30a1d4b4c4dc2a14752c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Interior Birdecorator Explore_SILLY.ogg"
+dest_files=["res://.godot/imported/Interior Birdecorator Explore_SILLY.ogg-c4eda11312bb30a1d4b4c4dc2a14752c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

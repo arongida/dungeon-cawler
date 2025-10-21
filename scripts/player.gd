@@ -11,6 +11,7 @@ signal leveled_up
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var nut_timer: Timer = $NutTimer
 
+
 var level = 1
 var exp = 0
 
@@ -72,6 +73,7 @@ func _on_area_entered(area: Area2D) -> void:
 	hit.emit()
 
 func level_up():
+	level += 1
 	leveled_up.emit()
 	
 
