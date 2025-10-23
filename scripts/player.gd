@@ -3,6 +3,8 @@ extends Area2D
 signal hit
 signal leveled_up
 
+enum State {FLYING, DEAD, WALKING}
+
 @export var nut_scene: PackedScene
 @export var speed = 200
 @export var hp = 100
@@ -11,6 +13,7 @@ signal leveled_up
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var nut_timer: Timer = $NutTimer
 
+var _state: State = State.WALKING
 
 var level = 1
 var exp = 0
@@ -41,18 +44,35 @@ func _handle_dead():
 
 func _process_movement(delta: float):
 		var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		velocity = velocity.normalized() * speed
+		var flyPressed = Input.is_action_pressed("fly")
+		var currentSpeed = speed
+
+		if flyPressed: 
+			currentSpeed *= 2
+			nut_timer.stop()
+		elif nut_timer.is_stopped():
+			nut_timer.start()
+			
+
+		if velocity.x != 0:
+			if flyPressed: 
+				animated_sprite.play("fly")
+			else: 
+				animated_sprite.play("walk")
+			scale.x = -1 if velocity.x > 0 else 1
+
+		elif velocity.y != 0:
+			if flyPressed: 
+				animated_sprite.play("fly")
+			else: 
+				animated_sprite.play("walk")
+		else:
+			animated_sprite.play("idle")
+			
+		velocity = velocity.normalized() * currentSpeed
 		position += velocity * delta
 		position.x = clamp(position.x, -12500, 12000)
 		position.y = clamp(position.y, -7000, 8000)
-		
-		if velocity.x != 0:
-			animated_sprite.play("walk")
-			scale.x = -1 if velocity.x > 0 else 1
-		elif velocity.y != 0:
-			animated_sprite.play("walk")
-		else:
-			animated_sprite.play("idle")
 	
 func start(pos):
 	position = pos
