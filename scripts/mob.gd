@@ -13,6 +13,7 @@ enum State {ALIVE, DEAD}
 var _state: State = State.ALIVE
 var _velocity: Vector2 = Vector2.ZERO
 var _player: Node2D
+var _soundTriggered: bool = false
 
 var exp_reward = 1
 
@@ -63,6 +64,9 @@ func _process_alive(delta: float) -> void:
 func _process_dead(delta: float) -> void:
 	if animated_sprite.frame >= 5:
 		_velocity = Vector2.UP * speed
+		if !_soundTriggered:
+			wing_flap_player.play()
+			_soundTriggered = true
 		
 func _updateAlpha(toValue: float):
 	modulate.a = toValue	
@@ -85,7 +89,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	var flash_tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
-	flash_tween.tween_callback(wing_flap_player.play)
+	#flash_tween.tween_callback(wing_flap_player.play)
 	
 	var modulate_tween = get_tree().create_tween()
 	modulate_tween.tween_method(_updateAlpha, 0.8, 0.1, 2)

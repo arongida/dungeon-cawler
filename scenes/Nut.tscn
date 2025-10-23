@@ -74,11 +74,10 @@ script = ExtResource("4_hct6p")
 
 [node name="CrackSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_33onv")
-volume_db = -10.0
+volume_db = -25.0
 pitch_scale = 0.9
 max_distance = 4000.0
-attenuation = 1.3195082
-max_polyphony = 4
+max_polyphony = 3
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]
