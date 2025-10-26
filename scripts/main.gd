@@ -51,8 +51,8 @@ func _on_hud_start_game() -> void:
 func update_score(score: int, exp: int):
 	_score += score
 	hud.update_score(_score)
-	player.exp += exp
-	hud.update_exp_bar(player.exp, player.level * 20)
+	player.exp_value += exp
+	hud.update_exp_bar(player.exp_value, player.level * 20)
 
 
 func _clean_up():

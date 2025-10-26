@@ -15,8 +15,8 @@ enum State {FLYING, DEAD, WALKING}
 
 var _state: State = State.WALKING
 
-var level = 1
-var exp = 0
+var level: int     = 1
+var exp_value: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,8 +32,8 @@ func _process(delta: float) -> void:
 		_handle_dead()
 		
 func _process_exp():
-	if exp >= level * 20:
-		exp = 0
+	if exp_value >= level * 20:
+		exp_value = 0
 		level_up()
 		
 
@@ -50,7 +50,7 @@ func _process_movement(delta: float):
 		if flyPressed: 
 			currentSpeed *= 2
 			nut_timer.stop()
-		elif nut_timer.is_stopped():
+		elif nut_timer.is_stopped() and visible:
 			nut_timer.start()
 			
 
@@ -87,7 +87,7 @@ func _updateFlash(toValue: float):
 	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
 func _on_area_entered(area: Area2D) -> void:		
-	var flash_tween = get_tree().create_tween()
+	var flash_tween: Tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
 	hp -= area.damage
 	hit.emit()
