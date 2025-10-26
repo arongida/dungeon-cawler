@@ -266,7 +266,6 @@ frame_progress = 0.24006453
 stream = ExtResource("4_ufksc")
 pitch_scale = 0.75
 max_distance = 4000.0
-max_polyphony = 3
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

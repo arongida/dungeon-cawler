@@ -560,7 +560,7 @@ rotation = 0.5791667
 scale = Vector2(-4.464328, -2.688871)
 shape = SubResource("CircleShape2D_onrkg")
 
-[node name="NutTimer" type="Timer" parent="."]
+[node name="NutTimer" type="Timer" parent="." groups=["timers"]]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="NutTimer" to="." method="_on_nut_timer_timeout"]

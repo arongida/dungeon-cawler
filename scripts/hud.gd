@@ -14,6 +14,12 @@ signal item_selected
 @onready var exp_bar: ProgressBar = $ExpBar
 @onready var level_up_menu: PopupMenu = $LevelUpMenu
 
+func _enter_tree() -> void:
+	Globals.hud = self
+	
+func _exit_tree() -> void:
+	Globals.hud = null
+
 func show_message(text):
 	message_label.text = text
 	message_label.show()
@@ -49,7 +55,7 @@ func _on_message_timer_timeout() -> void:
 	message_label.hide()
 	
 func update_hp(hp):
-	hp_label.text = "HP: " + str(hp)
+	hp_label.text = "HP: %.2f" % hp
 	
 func update_overlay(transparency):
 	color_overlay.color.a = transparency

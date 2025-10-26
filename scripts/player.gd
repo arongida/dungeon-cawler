@@ -1,22 +1,37 @@
 class_name Player
 extends Area2D
-signal hit
+signal died
 signal leveled_up
 
-enum State {FLYING, DEAD, WALKING}
 
 @export var nut_scene: PackedScene
+
+#Stats
 @export var speed = 200
-@export var hp = 100
+@export var hp = 100:
+	set(value):
+		hp = value
+		_process_hp()
+
+@export var projectile_count = 1
+@export var experience_gain = 10.0
+@export var defense = 0.0
+@export var damage = 1.0
+@export var cooldown_reduction: float = 0.0:
+	set(value):
+		cooldown_reduction = value
+		_cooldown_changed()
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var nut_timer: Timer = $NutTimer
 
-var _state: State = State.WALKING
 
 var level: int     = 1
-var exp_value: int = 0
+var exp_value: int = 0:
+	set(value):
+		exp_value = value
+		_process_exp()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,20 +42,30 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_process_movement(delta)
-	_process_exp()
-	if hp <= 0:
-		_handle_dead()
+
+
 		
 func _process_exp():
 	if exp_value >= level * 20:
 		exp_value = 0
 		level_up()
 		
+func _process_hp():
+		if hp <= 0:
+			_handle_dead()
+		Globals.hud.update_hp(hp)
 
+func _cooldown_changed():
+	for node in get_tree().get_nodes_in_group("timers"):
+		var timer := node as Timer
+		if timer:
+			timer.wait_time = 100 / (100 + cooldown_reduction)
+	
 func _handle_dead():
 		hide()
 		collision_shape.set_deferred("disabled", true)
 		nut_timer.stop()
+		died.emit()
 
 func _process_movement(delta: float):
 		var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -89,8 +114,8 @@ func _updateFlash(toValue: float):
 func _on_area_entered(area: Area2D) -> void:		
 	var flash_tween: Tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
-	hp -= area.damage
-	hit.emit()
+	var damage = area.damage * (100 / (100 + defense))
+	hp -= damage
 
 func level_up():
 	level += 1

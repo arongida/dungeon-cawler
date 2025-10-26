@@ -23,18 +23,22 @@ script = ExtResource("1_k5de2")
 [node name="LevelUpMenu" type="PopupMenu" parent="."]
 oversampling_override = 1.0
 initial_position = 1
-size = Vector2i(200, 200)
+size = Vector2i(450, 232)
 always_on_top = true
-content_scale_factor = 2.01
+content_scale_aspect = 4
+content_scale_stretch = 1
+content_scale_factor = 2.0
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
-item_count = 3
-item_0/text = "HP"
+item_count = 4
+item_0/text = "HP +15"
 item_0/id = 0
-item_1/text = "Speed"
+item_1/text = "Speed +20"
 item_1/id = 1
-item_2/text = "Cooldown"
+item_2/text = "Cooldown Reduction +10%"
 item_2/id = 2
+item_3/text = "Defense +15%"
+item_3/id = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1920.0
