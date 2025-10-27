@@ -65,12 +65,15 @@ func _on_player_leveled_up() -> void:
 
 func _on_hud_item_selected(index: int) -> void:
 	if index == 0:
-		player.hp += 15
+		player.health_component.max_hp += 15
+		Globals.hud.update_hp(player.health_component.hp)
 	elif index == 1:
 		player.speed += 20
 	elif index == 2:
 		player.cooldown_reduction += 10
 	elif index == 3:
-		player.defense += 10
+		player.defense += 15
+	elif index == 4:
+		player.damage_bonus += 0.15
 	hud.show_level_up_menu(false)
 	get_tree().paused = false

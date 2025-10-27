@@ -8,15 +8,11 @@ signal leveled_up
 
 #Stats
 @export var speed = 200
-@export var hp = 100:
-	set(value):
-		hp = value
-		_process_hp()
-
 @export var projectile_count = 1
-@export var experience_gain = 10.0
+@export var experience_gain = 2.0
 @export var defense = 0.0
-@export var damage = 1.0
+@export var damage = 80
+@export var damage_bonus = 1.0
 @export var cooldown_reduction: float = 0.0:
 	set(value):
 		cooldown_reduction = value
@@ -25,6 +21,8 @@ signal leveled_up
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var nut_timer: Timer = $NutTimer
+@onready var hp_bar: ProgressBar = $HPBar
+@onready var health_component: HealthComponent = $HealthComponent
 
 
 var level: int     = 1
@@ -50,10 +48,6 @@ func _process_exp():
 		exp_value = 0
 		level_up()
 		
-func _process_hp():
-		if hp <= 0:
-			_handle_dead()
-		Globals.hud.update_hp(hp)
 
 func _cooldown_changed():
 	for node in get_tree().get_nodes_in_group("timers"):
@@ -69,39 +63,40 @@ func _handle_dead():
 
 func _process_movement(delta: float):
 		var velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		var flyPressed = Input.is_action_pressed("fly")
-		var currentSpeed = speed
+		var fly_pressed = Input.is_action_pressed("fly")
+		var current_speed = speed
 
-		if flyPressed: 
-			currentSpeed *= 2
+		if fly_pressed: 
+			current_speed *= 2
 			nut_timer.stop()
 		elif nut_timer.is_stopped() and visible:
 			nut_timer.start()
 			
 
 		if velocity.x != 0:
-			if flyPressed: 
+			if fly_pressed: 
 				animated_sprite.play("fly")
 			else: 
 				animated_sprite.play("walk")
-			scale.x = -1 if velocity.x > 0 else 1
+			animated_sprite.flip_h = velocity.x > 0
 
 		elif velocity.y != 0:
-			if flyPressed: 
+			if fly_pressed: 
 				animated_sprite.play("fly")
 			else: 
 				animated_sprite.play("walk")
 		else:
 			animated_sprite.play("idle")
 			
-		velocity = velocity.normalized() * currentSpeed
+		velocity = velocity.normalized() * current_speed
 		position += velocity * delta
 		position.x = clamp(position.x, -12500, 12000)
 		position.y = clamp(position.y, -7000, 8000)
 	
 func start(pos):
 	position = pos
-	hp = 100
+	health_component.reset_to(100)
+	Globals.hud.update_hp(100)
 	show()
 	collision_shape.disabled = false
 
@@ -115,7 +110,8 @@ func _on_area_entered(area: Area2D) -> void:
 	var flash_tween: Tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
 	var damage = area.damage * (100 / (100 + defense))
-	hp -= damage
+	health_component.hp -= damage
+	Globals.hud.update_hp(health_component.hp)
 
 func level_up():
 	level += 1
@@ -126,3 +122,7 @@ func _on_nut_timer_timeout() -> void:
 	var nut = nut_scene.instantiate()
 	nut.position = position
 	get_parent().add_child(nut)
+
+
+func _on_health_component_died() -> void:
+	_handle_dead()

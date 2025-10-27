@@ -2,6 +2,7 @@ class_name Nut
 extends Area2D
 
 @export var speed = 400
+@export var damage = 80
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var crack_sound_player: AudioStreamPlayer2D = $CrackSoundPlayer

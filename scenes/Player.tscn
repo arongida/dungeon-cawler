@@ -1,9 +1,10 @@
-[gd_scene load_steps=75 format=3 uid="uid://dq8m7vo5cdnvk"]
+[gd_scene load_steps=76 format=3 uid="uid://dq8m7vo5cdnvk"]
 
 [ext_resource type="Texture2D" uid="uid://no1knafin5mj" path="res://assets/Crow/Crow.png" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/flash.gdshader" id="1_e80uo"]
 [ext_resource type="Script" uid="uid://d0ahve4xrt074" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://scenes/Nut.tscn" id="2_kne1u"]
+[ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/HealthComponent.tscn" id="5_qu4a1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdl7e"]
 resource_local_to_scene = true
@@ -539,13 +540,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
-radius = 11.275036
+radius = 24.0
 
 [node name="Area2D" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_onrkg")
 nut_scene = ExtResource("2_kne1u")
-metadata/_edit_group_ = true
+speed = 300
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_mdl7e")
@@ -555,12 +556,13 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.999999, 14)
-rotation = 0.5791667
-scale = Vector2(-4.464328, -2.688871)
+position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_onrkg")
 
 [node name="NutTimer" type="Timer" parent="." groups=["timers"]]
 
+[node name="HealthComponent" parent="." instance=ExtResource("5_qu4a1")]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="NutTimer" to="." method="_on_nut_timer_timeout"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

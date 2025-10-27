@@ -9,10 +9,11 @@ enum State {ALIVE, DEAD}
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var wing_flap_player: AudioStreamPlayer2D = $WingFlapPlayer
 @onready var main: Main = get_parent()
+@onready var health_component: HealthComponent = $HealthComponent
 
 var _state: State = State.ALIVE
 var _velocity: Vector2 = Vector2.ZERO
-var _player: Node2D
+var _player: Player
 var _soundTriggered: bool = false
 
 var exp_reward = 1
@@ -58,7 +59,7 @@ func _process_alive(delta: float) -> void:
 	_velocity = direction * current_speed
 	
 	if direction.x != 0:
-		scale.x = -1 if direction.x > 0 else 1 
+		animated_sprite.flip_h = _velocity.x > 0
 		
 		
 func _process_dead(delta: float) -> void:
@@ -76,6 +77,13 @@ func _updateFlash(toValue: float):
 	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
 func _on_area_entered(area: Area2D) -> void:
+	
+	if area is Player or area is Nut:
+		health_component.hp -= area.damage * _player.damage_bonus
+	
+
+
+func _on_health_component_died() -> void:
 	if _state == State.DEAD:
 		return
 	_state = State.DEAD
@@ -84,8 +92,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if animated_sprite.animation == "walk":
 		animated_sprite.play("takeoff")
 	collision_shape.set_deferred("disabled", true)
-	
-	
 	
 	var flash_tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
@@ -96,4 +102,3 @@ func _on_area_entered(area: Area2D) -> void:
 	modulate_tween.tween_callback(queue_free)
 	
 	main.update_score(1, exp_reward)
-	
