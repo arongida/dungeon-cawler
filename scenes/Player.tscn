@@ -5,16 +5,13 @@
 [ext_resource type="Script" uid="uid://d0ahve4xrt074" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://scenes/Nut.tscn" id="2_kne1u"]
 [ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/HealthComponent.tscn" id="5_qu4a1"]
+[ext_resource type="AudioStream" uid="uid://clced5t4heuft" path="res://assets/caw.wav" id="6_70d11"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdl7e"]
 resource_local_to_scene = true
 shader = ExtResource("1_e80uo")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
-atlas = ExtResource("1_4flbx")
-region = Rect2(3200, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("1_4flbx")
@@ -284,9 +281,6 @@ region = Rect2(1152, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_onrkg")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_i3pqv")
 }, {
 "duration": 1.0,
@@ -301,9 +295,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1jxqw")
 }],
-"loop": true,
+"loop": false,
 "name": &"caw",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -552,8 +546,10 @@ speed = 300
 material = SubResource("ShaderMaterial_mdl7e")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mgmjd")
-animation = &"idle"
+animation = &"caw"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
@@ -562,6 +558,10 @@ shape = SubResource("CircleShape2D_onrkg")
 [node name="NutTimer" type="Timer" parent="." groups=["timers"]]
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_qu4a1")]
+
+[node name="CawStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_70d11")
+bus = &"FX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="NutTimer" to="." method="_on_nut_timer_timeout"]

@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/flash.gdshader" id="1_drloa"]
 [ext_resource type="Script" uid="uid://dxshx6h06g58g" path="res://scripts/mob.gd" id="1_r6b5h"]
 [ext_resource type="Texture2D" uid="uid://des1yv7qgiuik" path="res://assets/Collared Dove/Collared Dove.png" id="2_ex06h"]
-[ext_resource type="AudioStream" uid="uid://bx1ljt3uoweqh" path="res://assets/wing-flap.mp3" id="4_ufksc"]
+[ext_resource type="AudioStream" uid="uid://dce0bplsb2kcv" path="res://assets/wing-flap.wav" id="4_fx5p6"]
 [ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/HealthComponent.tscn" id="5_fx5p6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufksc"]
@@ -260,9 +260,8 @@ animation = &"idle"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="WingFlapPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_ufksc")
-pitch_scale = 0.75
-max_distance = 4000.0
+stream = ExtResource("4_fx5p6")
+bus = &"FX"
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fx5p6")]
 

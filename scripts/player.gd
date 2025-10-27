@@ -23,6 +23,7 @@ signal leveled_up
 @onready var nut_timer: Timer = $NutTimer
 @onready var hp_bar: ProgressBar = $HPBar
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var caw_player: AudioStreamPlayer2D = $CawStreamPlayer
 
 
 var level: int     = 1
@@ -106,7 +107,8 @@ func combat_start():
 func _updateFlash(toValue: float):
 	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
-func _on_area_entered(area: Area2D) -> void:		
+func _on_area_entered(area: Area2D) -> void:	
+	caw_player.play()
 	var flash_tween: Tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
 	var damage = area.damage * (100 / (100 + defense))

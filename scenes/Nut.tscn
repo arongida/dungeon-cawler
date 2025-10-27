@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://baqjpu3pwdbj0" path="res://assets/walnut.png" id="2_33onv"]
 [ext_resource type="Script" uid="uid://bpn6iimcuf0lp" path="res://scripts/nut_sprite_2d.gd" id="3_3uwlf"]
 [ext_resource type="Script" uid="uid://d36ahco5wpo5h" path="res://scripts/trail.gd" id="4_hct6p"]
-[ext_resource type="AudioStream" uid="uid://dr31ns0xdsh8h" path="res://assets/nut-crack.mp3" id="5_33onv"]
+[ext_resource type="AudioStream" uid="uid://qytv6bxir5e" path="res://assets/nut-crack.wav" id="5_33onv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tilog"]
 radius = 6.08097
@@ -74,9 +74,8 @@ script = ExtResource("4_hct6p")
 
 [node name="CrackSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_33onv")
-volume_db = -25.0
-pitch_scale = 0.9
-max_distance = 4000.0
+volume_db = -5.0
+bus = &"FX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="SpinTimer" to="." method="_on_spin_timer_timeout"]

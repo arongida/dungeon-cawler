@@ -15,6 +15,10 @@ run/main_scene="uid://iu0lr6xqjp3t"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/output_latency.web=90
+
 [autoload]
 
 Globals="*res://scripts/globals.gd"
