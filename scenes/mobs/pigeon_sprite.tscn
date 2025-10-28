@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3 uid="uid://bc8xu8ugu5ayk"]
+
+[ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/flash.gdshader" id="1_jrgk4"]
+[ext_resource type="Texture2D" uid="uid://m4d8kn1suj3g" path="res://assets/Pigeon/Pigeon.png" id="2_jrgk4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drloa"]
+resource_local_to_scene = true
+shader = ExtResource("1_jrgk4")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sasg"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1920, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4087"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1984, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k18rk"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0j4m"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmpia"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly5l4"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hun6"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1280, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe46q"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1344, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uonjd"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1408, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oijve"]
+atlas = ExtResource("2_jrgk4")
+region = Rect2(1472, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4irwq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sasg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4087")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k18rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0j4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmpia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly5l4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hun6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe46q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uonjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oijve")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_drloa")
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_4irwq")
+animation = &"fly"

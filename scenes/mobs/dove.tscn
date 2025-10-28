@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bifcqhfj4knfa"]
+
+[ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/flash.gdshader" id="1_drloa"]
+[ext_resource type="Script" uid="uid://dxshx6h06g58g" path="res://scripts/mob.gd" id="1_r6b5h"]
+[ext_resource type="PackedScene" uid="uid://c8gylu5hus8rn" path="res://scenes/mobs/dove_sprite.tscn" id="2_fx5p6"]
+[ext_resource type="AudioStream" uid="uid://dce0bplsb2kcv" path="res://assets/wing-flap.wav" id="4_fx5p6"]
+[ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/health_component.tscn" id="5_fx5p6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufksc"]
+radius = 24.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4il3"]
+resource_local_to_scene = true
+shader = ExtResource("1_drloa")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[node name="MobArea" type="Area2D" groups=["mobs"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_r6b5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ufksc")
+debug_color = Color(0.7202103, 0.13961133, 0.2147871, 0.76862746)
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_fx5p6")]
+material = SubResource("ShaderMaterial_l4il3")
+
+[node name="WingFlapPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fx5p6")
+bus = &"FX"
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_fx5p6")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

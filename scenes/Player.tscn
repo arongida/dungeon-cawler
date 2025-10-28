@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://no1knafin5mj" path="res://assets/Crow/Crow.png" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://cav2lbxjijayo" path="res://shaders/flash.gdshader" id="1_e80uo"]
 [ext_resource type="Script" uid="uid://d0ahve4xrt074" path="res://scripts/player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://scenes/Nut.tscn" id="2_kne1u"]
-[ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/HealthComponent.tscn" id="5_qu4a1"]
+[ext_resource type="PackedScene" uid="uid://co62be2ugu8lf" path="res://scenes/nut.tscn" id="2_kne1u"]
+[ext_resource type="PackedScene" uid="uid://bhqgw8h57uj4i" path="res://scenes/health_component.tscn" id="5_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://clced5t4heuft" path="res://assets/caw.wav" id="6_70d11"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdl7e"]

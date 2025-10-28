@@ -1,7 +1,8 @@
 class_name Main
 extends Node2D
 
-@export var mob_scene: PackedScene
+@export var dove_scene: PackedScene
+@export var pigeon_scene: PackedScene
 
 @onready var hud: HUD = $HUD
 @onready var player: Player = $Player
@@ -33,7 +34,11 @@ func new_game():
 	
 
 func _on_mob_timer_timeout() -> void:
-	var mob = mob_scene.instantiate()
+	var mob: Mob
+	if randf() < 0.5:
+		mob = dove_scene.instantiate()
+	else:
+		mob = pigeon_scene.instantiate()
 	add_child(mob)
 
 func _on_start_timer_timeout() -> void:
@@ -75,5 +80,7 @@ func _on_hud_item_selected(index: int) -> void:
 		player.defense += 15
 	elif index == 4:
 		player.damage_bonus += 0.15
+	elif index == 5:
+		player.projectile_count += 0.5
 	hud.show_level_up_menu(false)
 	get_tree().paused = false

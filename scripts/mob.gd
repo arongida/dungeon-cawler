@@ -1,3 +1,4 @@
+class_name Mob
 extends Area2D
 
 enum State {ALIVE, DEAD}
@@ -30,7 +31,6 @@ func _ready() -> void:
 	_player = get_parent().find_child("Player")
 	animated_sprite.play("fly")
 	_assign_start_position()
-
 
 
 func _process(delta: float) -> void:
@@ -77,11 +77,8 @@ func _updateFlash(toValue: float):
 	(animated_sprite.material as ShaderMaterial).set_shader_parameter("flash_value", toValue)
 
 func _on_area_entered(area: Area2D) -> void:
-	
 	if area is Player or area is Nut:
 		health_component.hp -= area.damage * _player.damage_bonus
-	
-
 
 func _on_health_component_died() -> void:
 	if _state == State.DEAD:

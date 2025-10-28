@@ -8,12 +8,12 @@ signal leveled_up
 
 #Stats
 @export var speed = 200
-@export var projectile_count = 1
-@export var experience_gain = 2.0
-@export var defense = 0.0
-@export var damage = 80
-@export var damage_bonus = 1.0
-@export var cooldown_reduction: float = 0.0:
+@export var projectile_count := 1.5
+@export var experience_gain := 2.0
+@export var defense := 0.0
+@export var damage := 80
+@export var damage_bonus := 1.0
+@export var cooldown_reduction := 0.0:
 	set(value):
 		cooldown_reduction = value
 		_cooldown_changed()
@@ -121,9 +121,17 @@ func level_up():
 	
 
 func _on_nut_timer_timeout() -> void:
-	var nut = nut_scene.instantiate()
-	nut.position = position
-	get_parent().add_child(nut)
+	var guaranteed_projectiles = floor(projectile_count)
+	for i in range(guaranteed_projectiles):
+		var nut = nut_scene.instantiate()
+		nut.position = position
+		get_parent().add_child(nut)
+
+	var fractional_part = projectile_count - guaranteed_projectiles
+	if fractional_part > 0.0 and randf() < fractional_part:
+		var nut = nut_scene.instantiate()
+		nut.position = position
+		get_parent().add_child(nut)
 
 
 func _on_health_component_died() -> void:
