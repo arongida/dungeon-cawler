@@ -33,6 +33,7 @@ stream = ExtResource("4_1qlm5")
 bus = &"FX"
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_cj7ct")]
+max_hp = 150.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

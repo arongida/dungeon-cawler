@@ -24,19 +24,21 @@ func _ready() -> void:
 	
 func _set_max_hp(difference):
 	hp += difference
-	hp_bar.max_value = max_hp
+	if hp_bar:
+		hp_bar.max_value = max_hp
 
 func _set_hp():
 	if hp <= 0:
 		died.emit()
-	hp_bar.value = hp
-	if hp < max_hp:
-		hp_bar.show()
-		if (hp / max_hp) > 0.3:
-			var tween = get_tree().create_tween()
-			tween.tween_method(_update_hp_bar_alpha, 1.0, 0.0, 4)
-	else:
-		hp_bar.hide()
+	if hp_bar:
+		hp_bar.value = hp
+		if hp < max_hp:
+			hp_bar.show()
+			if (hp / max_hp) > 0.4:
+				var tween = get_tree().create_tween()
+				tween.tween_method(_update_hp_bar_alpha, 1.0, 0.0, 4)
+		else:
+			hp_bar.hide()
 
 func reset_to(new_max_hp: float):
 	max_hp = new_max_hp

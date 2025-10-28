@@ -12,6 +12,7 @@ extends Node2D
 @onready var music_player: ThemeMusicPlayer = $ThemeMusicPlayer
 
 var _score
+var _scaler := 1.01
 
 func _on_player_died() -> void:
 	game_over()
@@ -21,7 +22,6 @@ func game_over():
 	mob_timer.stop()
 	music_player.fadeOut()
 	hud.show_game_over()
-	_clean_up()
 	
 func new_game():
 	_clean_up()
@@ -32,6 +32,9 @@ func new_game():
 	hud.show_message("Get Ready!")
 	start_timer.start()
 	
+func _on_mob_scaling_timer_timeout() -> void:
+	_scaler += 0.01
+	get_tree().call_group("mobs", "increase_power", _scaler)
 
 func _on_mob_timer_timeout() -> void:
 	var mob: Mob

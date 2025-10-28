@@ -3,8 +3,8 @@ extends Area2D
 
 enum State {ALIVE, DEAD}
 
-@export var speed: int = 100
-@export var damage: int = 10
+@export var speed := 100.0
+@export var damage := 10.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -99,3 +99,12 @@ func _on_health_component_died() -> void:
 	modulate_tween.tween_callback(queue_free)
 	
 	main.update_score(1, exp_reward)
+
+func increase_power(power_coefficient: float):
+	speed *= power_coefficient
+	health_component.max_hp *= power_coefficient
+	damage *= power_coefficient
+	print("increased mob power by "+ str(power_coefficient))
+	print("speed "+str(speed))
+	print("health_component.maxhp "+ str(health_component.max_hp))
+	print("dmg "+str(damage))

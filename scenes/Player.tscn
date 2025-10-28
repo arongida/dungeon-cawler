@@ -541,6 +541,7 @@ collision_mask = 2
 script = ExtResource("1_onrkg")
 nut_scene = ExtResource("2_kne1u")
 speed = 300
+experience_gain = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_mdl7e")
