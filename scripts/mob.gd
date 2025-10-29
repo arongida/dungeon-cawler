@@ -78,7 +78,8 @@ func _updateFlash(toValue: float):
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player or area is Nut:
-		health_component.hp -= area.damage * _player.damage_bonus
+		var damage = area.damage * _player.damage_bonus
+		health_component.take_damage(damage)
 
 func _on_health_component_died() -> void:
 	if _state == State.DEAD:
@@ -104,7 +105,3 @@ func increase_power(power_coefficient: float):
 	speed *= power_coefficient
 	health_component.max_hp *= power_coefficient
 	damage *= power_coefficient
-	print("increased mob power by "+ str(power_coefficient))
-	print("speed "+str(speed))
-	print("health_component.maxhp "+ str(health_component.max_hp))
-	print("dmg "+str(damage))

@@ -95,6 +95,7 @@ func _process_movement(delta: float):
 		position.y = clamp(position.y, -7000, 8000)
 	
 func start(pos):
+	_reset_player_stats()
 	position = pos
 	health_component.reset_to(100)
 	Globals.hud.update_hp(100)
@@ -112,7 +113,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var flash_tween: Tween = get_tree().create_tween()
 	flash_tween.tween_method(_updateFlash, 1.0, 0.0, 0.2)
 	var damage = area.damage * (100 / (100 + defense))
-	health_component.hp -= damage
+	health_component.take_damage(damage)
 	Globals.hud.update_hp(health_component.hp)
 
 func level_up():
@@ -136,3 +137,15 @@ func _on_nut_timer_timeout() -> void:
 
 func _on_health_component_died() -> void:
 	_handle_dead()
+	
+func _reset_player_stats():
+	speed = 200
+	projectile_count = 1.5
+	experience_gain = 2.0
+	defense = 0.0
+	damage = 80
+	damage_bonus = 1.0
+	cooldown_reduction = 0.0
+	level = 1
+	exp_value = 0
+	

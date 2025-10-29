@@ -34,7 +34,6 @@ func new_game():
 	
 func _on_mob_scaling_timer_timeout() -> void:
 	_scaler += 0.01
-	get_tree().call_group("mobs", "increase_power", _scaler)
 
 func _on_mob_timer_timeout() -> void:
 	var mob: Mob
@@ -43,6 +42,7 @@ func _on_mob_timer_timeout() -> void:
 	else:
 		mob = pigeon_scene.instantiate()
 	add_child(mob)
+	mob.increase_power(_scaler)
 
 func _on_start_timer_timeout() -> void:
 	mob_timer.start()
@@ -74,6 +74,7 @@ func _on_player_leveled_up() -> void:
 func _on_hud_item_selected(index: int) -> void:
 	if index == 0:
 		player.health_component.max_hp += 15
+		player.health_component.hp += 15
 		Globals.hud.update_hp(player.health_component.hp)
 	elif index == 1:
 		player.speed += 20

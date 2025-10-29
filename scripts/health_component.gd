@@ -2,11 +2,12 @@ class_name HealthComponent
 extends Node
 signal died
 
+@export var damage_text: PackedScene
+
 @export var max_hp := 100.0:
 	set(value):
-		var difference = value - max_hp
 		max_hp = value
-		_set_max_hp(difference)
+		_set_max_hp()
 		
 var hp := 100.0:
 	set(value):
@@ -22,8 +23,7 @@ func _ready() -> void:
 	hp = max_hp
 	hp_bar.max_value = max_hp
 	
-func _set_max_hp(difference):
-	hp += difference
+func _set_max_hp():
 	if hp_bar:
 		hp_bar.max_value = max_hp
 
@@ -46,3 +46,12 @@ func reset_to(new_max_hp: float):
 	
 func _update_hp_bar_alpha(to_value):
 	hp_bar.modulate.a = to_value
+	
+func take_damage(damage):
+	hp -= damage
+	var floating_text: DamageText = damage_text.instantiate()
+	floating_text.text = str(int(damage))
+	add_child(floating_text)
+	floating_text.start_animation()
+	
+	
